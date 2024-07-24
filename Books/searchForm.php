@@ -54,7 +54,7 @@ mysqli_close($conn);
         value="1"
         required
       />
-      <label for="download_true">True</label>
+      <label for="download_true">Downloadable</label>
       <input
         type="radio"
         name="download_type"
@@ -62,7 +62,7 @@ mysqli_close($conn);
         value="0"
         required
       />
-      <label for="download_false">False</label>
+      <label for="download_false">Not Downloadable</label>
       <br /><br />
       <input type="submit" value="Search" />
     </form>
