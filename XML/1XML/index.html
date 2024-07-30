@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="fetchProduct">Request Data</button>
+  <script>
+    const btn = document.getElementById("fetchProduct");
+    btn.addEventListener("click", fetchProduct);
+
+    function fetchProduct() {
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => onFetch(xhr);
+      xhr.open("GET", "product.xml", true);
+      xhr.send();
+    }
+
+    function onFetch(xhr) {
+      try {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            let xmlResponse = xhr.responseXML;
+            let products = xmlResponse.getElementsByTagName("product");
+            for (product of products) {
+              document.body.innerHTML += `
+              <h1>${
+                product.getElementsByTagName("name")[0].textContent
+              }</h1>
+              `;
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+</body>
+</html>
